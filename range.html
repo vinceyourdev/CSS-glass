@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            background-repeat: none;
+            object-fit: cover;
+            background-image: url(/HTML/images/pexels-bich-tran-669996.jpg);        
+        }
+        
+        .container .bWrapper {
+            position: absolute;
+            left: 25%;
+            top: 29%;
+            max-height: 300px;
+            max-width: 300px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bWrapper .box {
+            max-height: 300px;
+            max-width: 300px;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px solid white;
+            background: rgba(255, 255, 255);
+            opacity: 1;
+            /* background-color: transparent; */
+        }
+
+        .bWrapper .b-d-b {
+            backdrop-filter: blur(0px);
+            position: inherit;
+            /* background: #000; */
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            border-radius: 50%;
+        }
+
+
+        .container .wrapper {
+            position: absolute;
+            right: 200px;
+            top: 25%;
+            padding: 25px;
+            border-radius: 10px;
+            width: 300px;
+            height: 350px;
+            background: #7858A6;
+            backdrop-filter: blur(0px);
+        }
+
+        /* .textValue {
+        } */
+
+        .container .wrapper .slider {
+            position: relative;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .slider::before {
+            content: '-';
+            position: absolute;
+            left: 0;
+            bottom: -15px;
+            color: #000;
+        }
+
+        .slider::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            bottom: -15px;
+            color: #000;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        
+        <div class="bWrapper">
+            <div class="box">
+            </div>
+            <div class="b-d-b" id="b-d-b"></div>
+        </div>
+
+        <div class="wrapper">
+
+            <div class="input" >
+                <input 
+                    class="slider" 
+                    id="inputTrans" 
+                    type="range" 
+                    value="0.50"
+                    min="0"
+                    max="1"
+                    step="0.1"
+                    >
+                <p class="textValue">
+                    opacity: <span id="valueTrans"></span>
+                </p>     
+            </div>
+
+            <div class="input">
+                <input 
+                    class="slider" 
+                    id="inputBlur" 
+                    type="range" 
+                    value="10" 
+                    min="1"
+                    max="20"
+                />
+            <p class="textValue">
+                backdrop-filter: blur(<span id="valueBlur"></span>)
+            </p>    
+            </div>
+            <div class="input">
+                <input 
+                    class="slider" 
+                    id="inputColor" 
+                    type="color" 
+                    
+                />
+            <p class="textValue">
+                background-color: <span id="valueColor"></span>
+            </p>    
+            </div>
+
+            
+
+        </div>
+    </div>
+
+</body>
+
+    <script>
+
+        // source for range input
+        const blu = document.querySelector('#inputBlur');
+        const opa = document.querySelector('#inputTrans');
+        const col = document.querySelector('#inputColor');
+        const bdb = document.querySelector('.b-d-b');
+        const outputTrans = document.querySelector('#valueTrans');
+        const outputBlur = document.querySelector('#valueBlur');
+        const outputColor = document.querySelector('#valueColor');
+
+        // box source 
+        const box = document.querySelector('.box');
+
+
+        // Transparency
+        outputTrans.innerHTML = opa.value;
+        opa.oninput = changeTrans;
+            function changeTrans () {
+                box.style.opacity = this.value;
+                outputTrans.innerHTML = this.value;
+            }
+
+
+        // range for blur
+        outputBlur.innerHTML = blu.value;
+        blu.oninput = changeBlur;
+        let b = blu.value
+            function changeBlur () {
+                bdb.style.backdropFilter =  'blur()';
+                outputBlur.innerHTML = this.value + 'px';
+            }
+
+        // color changing
+        col.addEventListener ('input', () => {
+            box.style.background = col.value;
+            outputColor.innerHTML = col.value;
+        });
+        
+
+    </script>
+
+</html>
