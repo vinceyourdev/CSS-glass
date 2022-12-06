@@ -41,20 +41,20 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 1px solid white;
             background: rgba(255, 255, 255);
             opacity: 1;
             /* background-color: transparent; */
         }
 
         .bWrapper .b-d-b {
-            backdrop-filter: blur(0px);
+            backdrop-filter: blur(20px);
             position: inherit;
             /* background: #000; */
             width: 100%;
             height: 100%;
             top: 0px;
             border-radius: 50%;
+            border-radius: 2px solid white;
         }
 
 
@@ -130,7 +130,7 @@
                     class="slider" 
                     id="inputBlur" 
                     type="range" 
-                    value="10" 
+                    value="10px" 
                     min="1"
                     max="20"
                 />
@@ -184,9 +184,9 @@
         // range for blur
         outputBlur.innerHTML = blu.value;
         blu.oninput = changeBlur;
-        let b = blu.value
-            function changeBlur () {
-                bdb.style.backdropFilter =  'blur()';
+        function changeBlur () {
+                let blurr = blu.value
+                bdb.style.backdropFilter =  'blur(' + blurr + 'px)';
                 outputBlur.innerHTML = this.value + 'px';
             }
 
