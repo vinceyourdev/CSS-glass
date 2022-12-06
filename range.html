@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CCS Glassmorphism</title>
+
+    <!-- website logo -->
+    <link rel="icon" href="/HTML/images/CCS_LOGO-removebg-preview.png">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 
     <style>
         * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
+            font-family: poppins, sans-serif;
         }
 
         .container {
@@ -27,29 +34,61 @@
         
         .container .bWrapper {
             position: absolute;
-            left: 25%;
-            top: 29%;
-            max-height: 300px;
-            max-width: 300px;
+            left: 25.4%;
+            top: 22.5%;
+            max-height: 400px;
+            max-width: 400px;
             width: 100%;
             height: 100%;
+            border: 2px solid white;
+            border-radius: 50%;
         }
 
         .bWrapper .box {
-            max-height: 300px;
-            max-width: 300px;
             width: 100%;
             height: 100%;
             border-radius: 50%;
             background: rgba(255, 255, 255);
             opacity: 1;
-            /* background-color: transparent; */
+        }
+
+        .bWrapper .logo {
+            position: absolute;
+            top: 10%;
+            left: 30%;
+            z-index: 3;
+        }
+
+        .logo .logoWrapper {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            row-gap: 10px;
+        }
+
+        .logo .logoWrapper> img {
+            height: 150px; 
+            width: 150px; 
+        }
+
+        .logo .logoWrapper .title {
+            font-size: 3rem;
+            font-weight: 500;
+            letter-spacing: 5px;
+        }
+
+        .logo .logoWrapper> p {
+            text-align: center;
+            font-weight: 400;
+            font-size: 2.5rem;
+            margin-left: -50px;
+            font-variant: small-caps;
         }
 
         .bWrapper .b-d-b {
             backdrop-filter: blur(20px);
             position: inherit;
-            /* background: #000; */
             width: 100%;
             height: 100%;
             top: 0px;
@@ -67,7 +106,7 @@
             width: 300px;
             height: 350px;
             background: #7858A6;
-            backdrop-filter: blur(0px);
+            backdrop-filter: blur();
         }
 
         /* .textValue {
@@ -103,8 +142,13 @@
     <div class="container">
         
         <div class="bWrapper">
-            <div class="box">
+            <div class="logo">
+                <div class="logoWrapper">
+                    <img src="/HTML/images/CCS_LOGO-removebg-preview.png" alt="CCS LOGO" >
+                    <p><span class="title">CCS</span> <br> Glassmorphism</p>
+                </div>
             </div>
+            <div class="box"></div>
             <div class="b-d-b" id="b-d-b"></div>
         </div>
 
@@ -130,8 +174,7 @@
                     class="slider" 
                     id="inputBlur" 
                     type="range" 
-                    value="10px" 
-                    min="1"
+                    min="0"
                     max="20"
                 />
             <p class="textValue">
@@ -182,10 +225,10 @@
 
 
         // range for blur
-        outputBlur.innerHTML = blu.value;
+        outputBlur.innerHTML = blu.value + 'px';
         blu.oninput = changeBlur;
         function changeBlur () {
-                let blurr = blu.value
+                let blurr = blu.value 
                 bdb.style.backdropFilter =  'blur(' + blurr + 'px)';
                 outputBlur.innerHTML = this.value + 'px';
             }
