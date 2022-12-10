@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS Glassmorphism</title>
+
+    <!-- website logo -->
+    <link rel="icon" href="/HTML/images/CCS_LOGO-removebg-preview.png">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- color picker CSS link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: poppins, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            background-repeat: none;
+            object-fit: cover;
+            background-image: url(/HTML/images/pexels-bich-tran-669996.jpg);        
+        }
+        
+        .container .bWrapper {
+            position: absolute;
+            left: 10.4%;
+            top: 22.5%;
+            max-height: 400px;
+            max-width: 400px;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0 , 0, .7);
+        }
+
+        .bWrapper .box {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            background: #ccc;
+            opacity: 1;
+        }
+
+        .bWrapper .logo {
+            position: absolute;
+            top: 10%;
+            left: 30%;
+            z-index: 3;
+        }
+
+        .logo .logoWrapper {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            row-gap: 10px;
+        }
+
+        .logo .logoWrapper> img {
+            height: 150px; 
+            width: 150px; 
+        }
+
+        .logo .logoWrapper .title {
+            font-size: 3rem;
+            font-weight: 500;
+            letter-spacing: 5px;
+        }
+
+        .logo .logoWrapper> p {
+            text-align: center;
+            font-weight: 400;
+            font-size: 2.5rem;
+            margin-left: -50px;
+            font-variant: small-caps;
+        }
+
+        .bWrapper .b-d-b {
+            backdrop-filter: blur(20px);
+            position: inherit;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            border-radius: 30px;
+            border-radius: 2px solid white;
+        }
+
+        .container .wrapper {
+            position: absolute;
+            right: 80px;
+            top: 15%;
+            padding: 25px;
+            border-radius: 30px;
+            width: 500px;
+            height: 550px;
+            background: rgba(57, 1, 53, 0.612);
+            border: 1px solid rgba(255,255,255, .7);
+            backdrop-filter: blur(15px);
+        }
+
+        .container .wrapper .slider {
+            position: relative;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .slider::before {
+            content: '-';
+            position: absolute;
+            left: 0;
+            bottom: -15px;
+            color: #000;
+        }
+
+        .slider::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            bottom: -15px;
+            color: #000;
+        }
+        
+        .wrapper .copy-text {
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+            border: 2px solid white;
+            background-color: #000;
+            padding: 10px;
+        }
+
+        .copy-text .text-code {
+            color: white;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        
+        <div class="bWrapper" id="bWrapper">
+            <div class="logo">
+                <div class="logoWrapper">
+                    <img src="/HTML/images/CCS_LOGO-removebg-preview.png" alt="CCS LOGO" >
+                    <p><span class="title">CCS</span> <br> Glassmorphism</p>
+                </div>
+            </div>
+            <div class="box" id="box"></div>
+            <div class="b-d-b" id="b-d-b"></div>
+        </div>
+
+        <di class="wrapper">
+
+            <div class="input" >
+                <p>Opacity:</p>
+                <input 
+                    class="slider" 
+                    id="inputTrans" 
+                    type="range" 
+                    value="0.5"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    >     
+            </div>
+
+            <div class="input">
+                <p>Blur:</p>
+                <input 
+                    class="slider" 
+                    id="inputBlur" 
+                    type="range" 
+                    min="0"
+                    max="20"
+                    step="0.5"
+                />
+            </div>
+            <div class="input">
+                <p>Color:</p>
+                <input 
+                    class="color-picker" 
+                    id="inputColor" 
+                    type="color"
+                    value=""
+                    step="0.5"
+                    />   
+            </div>
+
+            <input  id="checkbox-outline" type="checkbox">
+            <span>Show outline</span>
+
+            <div class="copy-text" id="copy-text">
+                <span class="text-code">
+                    background-color: <span id="valueColor"> </span>;
+                </span>
+
+                <span class="text-code"> 
+                    backdrop-filter: blur(<span id="valueBlur"></span>)
+                </span>
+
+                <span class="text-code">
+                    opacity: <span id="valueTrans"></span>;
+                </span>
+                <span class="text-code" id="border-code" style="visibility: hidden;">border: 1px solid rgba(255,255,255, .7);</span>
+            </div>
+
+            <div id="copy-btn">
+                <button>Copy CSS</button>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+    <script>
+
+        // range blur
+        const blu = document.querySelector('#inputBlur');
+        const outputBlur = document.querySelector('#valueBlur');
+
+        // range for opacity
+        const opa = document.querySelector('#inputTrans');
+        const outputTrans = document.querySelector('#valueTrans');
+        
+        // backdrop-filter
+        const bdb = document.querySelector('.b-d-b');
+        
+        // document for color picker
+        const col = document.querySelector('#inputColor');
+        const outputColor = document.querySelector('#valueColor');
+
+        // div of main object
+        const box = document.querySelector('.box');
+
+        // Id of check button for show outline 
+        const checkbox = document.querySelector('#checkbox-outline');
+
+        // Id of bWrapper 
+        const bWrap = document.querySelector('#bWrapper');  
+        
+        // document for code of border, visibility & hidden  
+        const bordrCode = document.querySelector('#border-code'); 
+
+        // text area to copy 
+        // let copyText = document.querySelectorAll('#copy-text, span');
+        // button for copying text 
+        const copyBtn = document.querySelector('#copy-btn');
+
+        // function for checkbox
+        checkbox.addEventListener('click', bordr);
+
+        // function of visibility of code of border of the object
+        function bordr () {
+                    if (checkbox.checked) {
+                    bWrap.style.border = '2px solid white';
+                    bordrCode.style.visibility = 'visible';
+                }
+                else { 
+                    bWrap.style.border = 'none';
+                    bordrCode.style.visibility = 'hidden';
+                }
+            }
+
+        // Transparency function
+        outputTrans.innerHTML = opa.value;
+        opa.oninput = changeTrans;
+            function changeTrans () {
+                box.style.opacity = this.value;
+                outputTrans.innerHTML = this.value;
+            }
+
+        // Blur function 
+        outputBlur.innerHTML = blu.value + 'px';
+        blu.oninput = changeBlur;
+        function changeBlur () {
+                let blurr = blu.value 
+                bdb.style.backdropFilter =  'blur(' + blurr + 'px)';
+                outputBlur.innerHTML = this.value + 'px';
+            }
+
+        // Function for color picker
+        col.addEventListener ('input', () => {
+            box.style.background = col.value;
+            outputColor.innerHTML = col.value;
+        });
+        
+
+    </script>
+
+</html>
+
